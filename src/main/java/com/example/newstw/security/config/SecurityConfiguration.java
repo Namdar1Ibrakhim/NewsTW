@@ -28,9 +28,7 @@ public class SecurityConfiguration{
             http
                 .csrf(csrf -> csrf.disable())
                     .authorizeHttpRequests(auth->{
-                        auth.requestMatchers("/admin/**").hasAuthority("ADMIN")
-                                .requestMatchers("/moderator/**").hasAuthority("MODERATOR")
-                                .requestMatchers("/graphiql").permitAll()
+                        auth.requestMatchers("/graphiql").permitAll()
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers(AUTH_WHITELIST).permitAll()
                                 .anyRequest().authenticated();
