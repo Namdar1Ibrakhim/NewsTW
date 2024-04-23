@@ -1,5 +1,6 @@
 package com.example.newstw.repository;
 
+import com.example.newstw.entity.Category;
 import com.example.newstw.entity.News;
 import com.example.newstw.enums.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,4 +31,6 @@ public interface NewsRepository extends JpaRepository<News, Long>{
     Optional<News> findById(Long id);
 
     List<News> getByStatus(Status status);
+
+    Optional<News> findByCategory(Category category);
 }

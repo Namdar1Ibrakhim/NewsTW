@@ -3,6 +3,7 @@ package com.example.newstw.service;
 import com.example.newstw.dto.request.NewsRequestDto;
 import com.example.newstw.dto.response.NewsResponseDto;
 import com.example.newstw.entity.News;
+import com.example.newstw.entity.User;
 import com.example.newstw.enums.Status;
 
 import java.util.List;
@@ -18,6 +19,8 @@ public interface NewsService {
     void update(NewsRequestDto newsRequestDto);
 
     void delete(Long id);
+
+    void save(NewsRequestDto newsRequestDto, User user);
 
     List<News> getByStatus(Status status);
 

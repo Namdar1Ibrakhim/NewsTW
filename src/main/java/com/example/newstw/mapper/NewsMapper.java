@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface NewsMapper  extends Mappable<News, NewsResponseDto>{
+public interface NewsMapper extends Mappable<News, NewsResponseDto>{
 
 
 }

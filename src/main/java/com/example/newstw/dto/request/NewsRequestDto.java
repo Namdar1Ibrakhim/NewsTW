@@ -18,4 +18,6 @@ public class NewsRequestDto {
     private String imageUrl;
 
     private String numberOfLikes;
+
+    private Long categoryId;
 }

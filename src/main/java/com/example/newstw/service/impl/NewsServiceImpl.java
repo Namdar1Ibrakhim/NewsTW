@@ -2,9 +2,12 @@ package com.example.newstw.service.impl;
 
 import com.example.newstw.dto.request.NewsRequestDto;
 import com.example.newstw.dto.response.NewsResponseDto;
+import com.example.newstw.entity.Category;
 import com.example.newstw.entity.News;
+import com.example.newstw.entity.User;
 import com.example.newstw.enums.Status;
 import com.example.newstw.mapper.NewsMapper;
+import com.example.newstw.repository.CategoryRepository;
 import com.example.newstw.repository.NewsRepository;
 import com.example.newstw.service.NewsService;
 import jakarta.persistence.EntityNotFoundException;
@@ -21,6 +24,7 @@ public class NewsServiceImpl implements NewsService {
 
     private final NewsRepository newsRepository;
     private final NewsMapper newsMapper;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public NewsResponseDto getById(Long id) {
@@ -43,11 +47,16 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public void update(NewsRequestDto newsRequestDto) {
+        Category category = categoryRepository.findById(newsRequestDto.getCategoryId())
+                .orElseThrow(() -> new EntityNotFoundException("Category not found with id " + newsRequestDto.getCategoryId()));
+
         News news = newsRepository.findById(newsRequestDto.getId())
             .orElseThrow(() ->new EntityNotFoundException("News not fount with id: " + newsRequestDto.getId()));
+
         news.setTitle(newsRequestDto.getTitle());
         news.setDescription(newsRequestDto.getDescription());
         news.setImageUrl(newsRequestDto.getImageUrl());
+        news.setCategory(category);
         news.setStatus(Status.WAITING);
         newsRepository.save(news);
     }
@@ -59,6 +68,24 @@ public class NewsServiceImpl implements NewsService {
         newsRepository.delete(news);
 
     }
+
+    @Override
+    public void save(NewsRequestDto newsRequestDto, User user) {
+        Category category = categoryRepository.findById(newsRequestDto.getCategoryId())
+                .orElseThrow(() -> new EntityNotFoundException("Category not found with id " + newsRequestDto.getCategoryId()));
+
+        News news = News.builder()
+                .title(newsRequestDto.getTitle())
+                .description(newsRequestDto.getDescription())
+                .imageUrl(newsRequestDto.getImageUrl())
+                .author(user)
+                .numberOfLikes(1L)
+                .status(Status.WAITING)
+                .category(category)
+                .build();
+        newsRepository.save(news);
+    }
+
     @Override
     public List<News> getByStatus(Status status) {
         List<News> newsList = newsRepository.getByStatus(status);
