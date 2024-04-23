@@ -9,7 +9,7 @@ services:
     depends_on:
       - postgres
     environment:
-      POSTGRES_DB: jwt_security
+      POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
@@ -19,7 +19,7 @@ services:
     container_name: postgres-container
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: jwt_security
+      POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:

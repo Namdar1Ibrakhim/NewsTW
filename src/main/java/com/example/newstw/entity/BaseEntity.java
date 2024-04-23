@@ -1,10 +1,6 @@
 package com.example.newstw.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
-import lombok.Data;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +19,9 @@ public abstract class BaseEntity implements Serializable {
 
     private Date createdAt;
 
-
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = new Date();
+    }
 
 }

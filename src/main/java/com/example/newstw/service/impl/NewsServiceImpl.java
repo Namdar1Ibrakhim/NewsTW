@@ -14,6 +14,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -39,10 +42,12 @@ public class NewsServiceImpl implements NewsService {
         return newsMapper.toDtoList(newsList);
     }
 
+
     @Override
-    public List<NewsResponseDto> filterNews(String title, String description, String imageUrl, String numberOfLikes) {
-        List<News> newsList = newsRepository.filterNews(title, description, imageUrl, numberOfLikes);
-        return newsMapper.toDtoList(newsList);
+    public List<NewsResponseDto> filterNews(String title, String description, String imageUrl, String numberOfLikes, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        List<News> newsPage = newsRepository.filterNews(title, description, imageUrl, numberOfLikes, pageable);
+        return newsMapper.toDtoList(newsPage);
     }
 
     @Override
@@ -87,9 +92,9 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<News> getByStatus(Status status) {
+    public List<NewsResponseDto> getByStatus(Status status) {
         List<News> newsList = newsRepository.getByStatus(status);
-        return newsList;
+        return newsMapper.toDtoList(newsList);
     }
 
     @Override

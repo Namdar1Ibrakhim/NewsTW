@@ -2,7 +2,7 @@ package com.example.newstw.controllers;
 
 
 import com.example.newstw.dto.request.PasswordEditRequest;
-import com.example.newstw.dto.UserDto;
+import com.example.newstw.dto.response.UserDto;
 import com.example.newstw.entity.User;
 import com.example.newstw.exception.PasswordMismatchException;
 import com.example.newstw.exception.UserNotFoundException;

@@ -36,6 +36,4 @@ public class News extends BaseEntity{
     private List<Comments> commentsList;
 
 
-
-
 }

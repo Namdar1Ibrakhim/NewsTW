@@ -1,6 +1,6 @@
 package com.example.newstw.mapper;
 
-import com.example.newstw.dto.UserDto;
+import com.example.newstw.dto.response.UserDto;
 import com.example.newstw.entity.User;
 import org.mapstruct.Mapper;
 

@@ -3,6 +3,8 @@ package com.example.newstw.repository;
 import com.example.newstw.entity.Category;
 import com.example.newstw.entity.News;
 import com.example.newstw.enums.Status;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,7 +26,8 @@ public interface NewsRepository extends JpaRepository<News, Long>{
             @Param("title") String title,
             @Param("description") String description,
             @Param("imageUrl") String imageUrl,
-            @Param("numberOfLikes") String numberOfLikes
+            @Param("numberOfLikes") String numberOfLikes,
+            Pageable pageable
     );
 
     @Query("SELECT n FROM News n WHERE n.id = :id AND n.status='ACTIVE'")
@@ -32,5 +35,5 @@ public interface NewsRepository extends JpaRepository<News, Long>{
 
     List<News> getByStatus(Status status);
 
-    Optional<News> findByCategory(Category category);
+    List<News> findByCategory(Category category);
 }

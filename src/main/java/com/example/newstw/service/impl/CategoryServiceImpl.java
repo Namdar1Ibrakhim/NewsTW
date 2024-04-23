@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -42,13 +43,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public NewsResponseDto getNewsByCategoryId(Long categoryId) {
+    public List<NewsResponseDto> getNewsByCategoryId(Long categoryId) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() ->new EntityNotFoundException("Category not fount with id: " + categoryId));
 
-        News news = newsRepository.findByCategory(category)
-                .orElseThrow(() -> new EntityNotFoundException("News not found with category by id: " + categoryId));
-        return newsMapper.toDto(news);
+        List<News> newsList = newsRepository.findByCategory(category);
+        return newsMapper.toDtoList(newsList);
     }
 
     @Override
