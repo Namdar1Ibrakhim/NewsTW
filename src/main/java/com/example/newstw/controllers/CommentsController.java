@@ -5,6 +5,7 @@ import com.example.newstw.dto.response.CategoryResponseDto;
 import com.example.newstw.dto.response.CommentsResponseDto;
 import com.example.newstw.entity.User;
 import com.example.newstw.service.CommentsService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class CommentsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity add(@RequestBody CommentsRequestDto commentsRequestDto, @AuthenticationPrincipal User user){
+    public ResponseEntity add(@RequestBody @Valid CommentsRequestDto commentsRequestDto, @AuthenticationPrincipal User user){
         commentsService.add(commentsRequestDto, user);
         return new ResponseEntity(HttpStatus.OK);
     }

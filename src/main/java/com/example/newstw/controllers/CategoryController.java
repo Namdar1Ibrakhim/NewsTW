@@ -4,6 +4,7 @@ import com.example.newstw.dto.request.CategoryRequestDto;
 import com.example.newstw.dto.response.CategoryResponseDto;
 import com.example.newstw.dto.response.NewsResponseDto;
 import com.example.newstw.service.CategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class CategoryController{
     }
 
     @PostMapping("/update")
-    public ResponseEntity update(@RequestBody CategoryRequestDto categoryRequestDto){
+    public ResponseEntity update(@RequestBody @Valid CategoryRequestDto categoryRequestDto){
         categoryService.update(categoryRequestDto);
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -45,7 +46,7 @@ public class CategoryController{
     }
 
     @PostMapping("/save")
-    public ResponseEntity save(@RequestBody CategoryRequestDto categoryRequestDto){
+    public ResponseEntity save(@RequestBody @Valid CategoryRequestDto categoryRequestDto){
         categoryService.save(categoryRequestDto);
         return new ResponseEntity(HttpStatus.OK);
     }

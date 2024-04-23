@@ -6,6 +6,7 @@ import com.example.newstw.entity.News;
 import com.example.newstw.entity.User;
 import com.example.newstw.enums.Status;
 import com.example.newstw.service.NewsService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -56,7 +57,7 @@ public class NewsController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity save(@RequestBody NewsRequestDto newsRequestDto, @AuthenticationPrincipal User user) {
+    public ResponseEntity save(@RequestBody @Valid NewsRequestDto newsRequestDto, @AuthenticationPrincipal User user) {
         newsService.save(newsRequestDto, user);
         return new ResponseEntity(HttpStatus.OK);
     }
