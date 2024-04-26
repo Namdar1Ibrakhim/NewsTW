@@ -33,7 +33,7 @@ public class CategoryController{
         return ResponseEntity.ok(categoryService.getNewsByCategoryId(id));
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity update(@RequestBody @Valid CategoryRequestDto categoryRequestDto){
         categoryService.update(categoryRequestDto);
         return new ResponseEntity(HttpStatus.OK);

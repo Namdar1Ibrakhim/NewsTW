@@ -6,27 +6,12 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: NewsTW
-    depends_on:
-      - postgres
     environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://viaduct.proxy.rlwy.net:59733/railway
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ApMBTKJuIMfSYIUuYdHZTspZSWuouuTB
     ports:
       - '8080:8080'
-
-  postgres:
-    container_name: postgres-container
-    image: postgres:16-alpine
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    ports:
-      - "5433:5432"
-    restart: always
 
 volumes:
   postgres-data:
