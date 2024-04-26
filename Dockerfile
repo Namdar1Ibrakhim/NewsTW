@@ -1,5 +1,3 @@
-docker-compose -f compose.yml up# Dockerfile
-
 # Stage 1: Build
 FROM openjdk:21-jdk AS build
 
